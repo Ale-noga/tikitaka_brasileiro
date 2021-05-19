@@ -26,9 +26,17 @@ public class Nacionalidade {
 	@Size(min = 3)
 	private String pais;
 
+	@NotNull
+	@Size(min = 3)
+	private String bandeira;
+
 	@OneToMany(mappedBy = "nacionalidade", cascade = CascadeType.REFRESH)
 	@JsonIgnoreProperties("nacionalidade")
 	private List<Usuario> usuario;
+
+	@OneToMany(mappedBy = "nacionalidade", cascade = CascadeType.REFRESH)
+	@JsonIgnoreProperties("nacionalidade")
+	private List<Jogador> jogador;
 
 	public Long getId() {
 		return id;
@@ -46,12 +54,28 @@ public class Nacionalidade {
 		this.pais = pais;
 	}
 
+	public String getBandeira() {
+		return bandeira;
+	}
+
+	public void setBandeira(String bandeira) {
+		this.bandeira = bandeira;
+	}
+
 	public List<Usuario> getUsuario() {
 		return usuario;
 	}
 
 	public void setUsuario(List<Usuario> usuario) {
 		this.usuario = usuario;
+	}
+
+	public List<Jogador> getJogador() {
+		return jogador;
+	}
+
+	public void setJogador(List<Jogador> jogador) {
+		this.jogador = jogador;
 	}
 
 }

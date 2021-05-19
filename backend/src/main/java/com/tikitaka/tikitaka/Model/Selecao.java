@@ -20,8 +20,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
 @Entity
-@Table(name = "time")
-public class Time {
+@Table(name = "selecao")
+public class Selecao {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,30 +35,23 @@ public class Time {
 	@Size(min = 3)
 	private String logo;
 
-	@NotNull
-	@Size(min = 3)
-	private String cidade;
-
-	@Size(min = 3)
-	private String estado;
-
 	@Size(min = 3)
 	private String titulos;
 
 	@ManyToOne
-	@JsonIgnoreProperties("time")
-	private Pais pais;
+	@JsonIgnoreProperties("selecao")
+	private Continente continente;
 
 	@NotNull
 	@Size(min = 3)
 	private String tecnico;
 
-	@OneToMany(mappedBy = "time")
-	@JsonIgnoreProperties("time")
+	@OneToMany(mappedBy = "selecao", cascade = CascadeType.REFRESH)
+	@JsonIgnoreProperties("selecao")
 	private List<Jogador> jogador;
 
 	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-	@JoinTable(name = "times_usuarios", joinColumns = @JoinColumn(name = "time_id"), inverseJoinColumns = @JoinColumn(name = "usuario_id"))
+	@JoinTable(name = "selecao_usuarios", joinColumns = @JoinColumn(name = "selecao_id"), inverseJoinColumns = @JoinColumn(name = "usuario_id"))
 	@JsonIgnoreProperties("time")
 	private List<Usuario> usuario;
 
@@ -86,22 +79,6 @@ public class Time {
 		this.logo = logo;
 	}
 
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-
 	public String getTitulos() {
 		return titulos;
 	}
@@ -110,12 +87,12 @@ public class Time {
 		this.titulos = titulos;
 	}
 
-	public Pais getPais() {
-		return pais;
+	public Continente getContinente() {
+		return continente;
 	}
 
-	public void setPais(Pais pais) {
-		this.pais = pais;
+	public void setContinente(Continente continente) {
+		this.continente = continente;
 	}
 
 	public String getTecnico() {

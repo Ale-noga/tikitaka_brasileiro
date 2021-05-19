@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -50,6 +51,14 @@ public class Usuario {
 	@ManyToMany(mappedBy = "usuario", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JsonIgnoreProperties("usuario")
 	private List<Time> time;
+
+	@ManyToMany(mappedBy = "usuario", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JsonIgnoreProperties("usuario")
+	private List<Selecao> selecao;
+
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JsonIgnoreProperties("usuario")
+	private List<Postagem> postagem;
 
 	public Long getId() {
 		return id;
@@ -121,6 +130,22 @@ public class Usuario {
 
 	public void setTime(List<Time> time) {
 		this.time = time;
+	}
+
+	public List<Selecao> getSelecao() {
+		return selecao;
+	}
+
+	public void setSelecao(List<Selecao> selecao) {
+		this.selecao = selecao;
+	}
+
+	public List<Postagem> getPostagem() {
+		return postagem;
+	}
+
+	public void setPostagem(List<Postagem> postagem) {
+		this.postagem = postagem;
 	}
 
 }
